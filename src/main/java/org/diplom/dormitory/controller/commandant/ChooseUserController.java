@@ -29,6 +29,9 @@ public class ChooseUserController {
         chooseUserMenuItem.setOnAction(event -> {
             loadForm("/fxml/commandant/createUser.fxml");
         });
+        chooseStaffMenuItem.setOnAction(event -> {
+            loadForm("/fxml/commandant/createStaff.fxml");
+        });
 
     }
 

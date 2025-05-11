@@ -72,7 +72,7 @@ public class CreateUserController {
     @FXML
     public void initialize() {
         // Запускаем задачу в фоне
-        Task<ObservableList<GroupModel>> task = CommandantService.createGroupLoadTask();
+        Task<ObservableList<GroupModel>> task = CommandantService.getAllGroupsTask();
 
         task.setOnSucceeded(e -> {
             ObservableList<GroupModel> groupList = task.getValue();

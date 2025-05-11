@@ -4,10 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
-import org.diplom.dormitory.model.GroupModel;
-import org.diplom.dormitory.model.ParentModel;
-import org.diplom.dormitory.model.ResidentModel;
-import org.diplom.dormitory.model.ResidentParentModel;
+import org.diplom.dormitory.model.*;
 import org.diplom.dormitory.util.JsonBuilder;
 
 import java.io.InputStream;
@@ -19,6 +16,43 @@ import java.util.List;
 import java.util.Scanner;
 
 public class CommandantService {
+
+    public static StaffModel createStaff (String json) {
+        try {
+            URL url = new URL("http://localhost:8080/api/staff");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type", "application/json; utf-8");
+            connection.setRequestProperty("Accept", "application/json");
+            connection.setDoOutput(true);
+
+            try (OutputStream os = connection.getOutputStream()) {
+                byte[] input = json.getBytes(StandardCharsets.UTF_8);
+                os.write(input, 0, input.length);
+            }
+
+            int responseCode = connection.getResponseCode();
+            if (responseCode == 201 || responseCode == 200) {
+                try (InputStream inputStream = connection.getInputStream()) {
+                    return JsonBuilder.getObjectMapper().readValue(inputStream, StaffModel.class);
+                }
+            } else {
+                System.err.println("Ошибка: " + responseCode);
+                try (InputStream errorStream = connection.getErrorStream()) {
+                    if (errorStream != null) {
+                        Scanner scanner = new Scanner(errorStream, StandardCharsets.UTF_8).useDelimiter("\\A");
+                        if (scanner.hasNext()) {
+                            System.out.println("Ответ с ошибкой: " + scanner.next());
+                        }
+                    }
+                }
+
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     public static String addParentAndResident(String json) {
         try {
@@ -133,7 +167,39 @@ public class CommandantService {
         return null;
     }
 
-    public static Task<ObservableList<GroupModel>> createGroupLoadTask() {
+    public static Task<Integer> setCuratorInGroup(Integer groupId, Integer curatorId) {
+        return new Task<>() {
+            @Override
+            protected Integer call() {
+                try {
+                    // Формируем URL с параметрами
+                    String urlString = "http://localhost:8080/api/groups?groupId=" + groupId + "&curatorId=" + curatorId;
+                    URL url = new URL(urlString);
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+                    connection.setRequestMethod("PUT"); // Устанавливаем метод запроса
+                    connection.setRequestProperty("Accept", "application/json");
+                    connection.setDoOutput(true); // PUT требует doOutput(true), даже если тело пустое
+
+                    connection.connect();
+
+                    int responseCode = connection.getResponseCode();
+                    if (responseCode == 200) {
+                        return 1; // Успех
+                    } else {
+                        System.err.println("Ошибка: код ответа " + responseCode);
+                        return -1; // Ошибка со стороны сервера/клиента
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return -2; // Прочая ошибка
+                }
+            }
+        };
+    }
+
+
+    public static Task<ObservableList<GroupModel>> getAllGroupsTask() {
         return new Task<>() {
             @Override
             protected ObservableList<GroupModel> call() {
@@ -150,6 +216,32 @@ public class CommandantService {
                                 mapper.getTypeFactory().constructCollectionType(List.class, GroupModel.class)
                         );
                         return FXCollections.observableArrayList(groups);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return FXCollections.observableArrayList();
+            }
+        };
+    }
+
+    public static Task<ObservableList<RoleModel>> getAllRolesTask() {
+        return new Task<>() {
+            @Override
+            protected ObservableList<RoleModel> call() {
+                try {
+                    URL url = new URL("http://localhost:8080/api/roles");
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.setRequestMethod("GET");
+                    connection.setRequestProperty("Accept", "application/json");
+
+                    if (connection.getResponseCode() == 200) {
+                        ObjectMapper mapper = new ObjectMapper();
+                        List<RoleModel> roles = mapper.readValue(
+                                connection.getInputStream(),
+                                mapper.getTypeFactory().constructCollectionType(List.class, RoleModel.class)
+                        );
+                        return FXCollections.observableArrayList(roles);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

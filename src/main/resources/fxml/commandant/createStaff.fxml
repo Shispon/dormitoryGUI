@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.diplom.dormitory.controller.commandant.CreateStuffController">
+<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.diplom.dormitory.controller.commandant.CreateStaffController">
     <children>
         <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
             <content>
@@ -22,13 +22,13 @@
                         <TextField fx:id="mail" layoutX="165.0" layoutY="110.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="275.0" promptText="Введите почту пользователя" />
                         <TextField fx:id="phoneNumber" layoutX="165.0" layoutY="160.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="275.0" promptText="Введите номер телефона пользователя" />
                         <TextField fx:id="password" layoutX="165.0" layoutY="210.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="275.0" promptText="Введите пароль пользователя" />
-                  <HBox>
+                  <HBox alignment="TOP_CENTER">
                      <children>
                         <CheckBox fx:id="isPasswordGenerator" mnemonicParsing="false" text="Автоматически сгенерировать пароль" />
                      </children>
                   </HBox>
                         <ComboBox fx:id="roles" prefHeight="25.0" prefWidth="275.0" promptText="Выберите роль" />
-                        <ComboBox fx:id="groupComboBox" prefHeight="25.0" prefWidth="275.0" promptText="Выберите группу" visible="false" managed="false"/>
+                        <ComboBox fx:id="groupComboBox" managed="false" prefHeight="25.0" prefWidth="275.0" promptText="Выберите группу" visible="false" />
 
                         <BorderPane>
                             <right>

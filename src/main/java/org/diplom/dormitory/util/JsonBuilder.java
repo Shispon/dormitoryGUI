@@ -7,6 +7,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.diplom.dormitory.model.ParentModel;
 import org.diplom.dormitory.model.ResidentModel;
 import org.diplom.dormitory.model.ResidentParentModel;
+import org.diplom.dormitory.model.StaffModel;
 
 public class JsonBuilder {
 
@@ -31,5 +32,9 @@ public class JsonBuilder {
 
     public static String buildResidentParentJson(ResidentParentModel residentParentModel) throws JsonProcessingException {
         return objectMapper.writeValueAsString(residentParentModel);
+    }
+
+    public static String buildStaffJson(StaffModel staffModel) throws JsonProcessingException {
+        return objectMapper.writeValueAsString(staffModel);
     }
 }
