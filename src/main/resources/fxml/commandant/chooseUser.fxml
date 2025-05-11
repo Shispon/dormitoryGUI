@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.diplom.dormitory.controller.commandant.ChooseUserController">
+    <children>
+        <Button fx:id="returnBackButton" mnemonicParsing="false" text="Вернуться" />
+        <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+            <children>
+                <MenuButton mnemonicParsing="false" text="Выберите нового пользователя">
+                    <items>
+                        <MenuItem fx:id="chooseUserMenuItem" mnemonicParsing="false" text="Создать нового жильца" />
+                        <MenuItem fx:id="chooseStaffMenuItem" mnemonicParsing="false" text="Создать нового работника" />
+                    </items>
+                </MenuButton>
+                <VBox fx:id="dynamicContentPane" VBox.vgrow="ALWAYS" />
+            </children>
+        </VBox>
+    </children>
+</VBox>

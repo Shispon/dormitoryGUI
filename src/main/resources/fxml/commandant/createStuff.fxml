@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.diplom.dormitory.controller.commandant.CreateStuffController">
+    <children>
+        <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+            <content>
+                <VBox alignment="TOP_CENTER" spacing="25.0">
+                    <children>
+                        <TextField fx:id="firstName" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="275.0" promptText="Введите имя пользователя" />
+                        <TextField fx:id="secondName" layoutX="165.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="275.0" promptText="Введите фамилию пользователя" />
+                        <TextField fx:id="lastName" layoutX="165.0" layoutY="60.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="275.0" promptText="Введите отчество пользователя" />
+                        <TextField fx:id="mail" layoutX="165.0" layoutY="110.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="275.0" promptText="Введите почту пользователя" />
+                        <TextField fx:id="phoneNumber" layoutX="165.0" layoutY="160.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="275.0" promptText="Введите номер телефона пользователя" />
+                        <TextField fx:id="password" layoutX="165.0" layoutY="210.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="275.0" promptText="Введите пароль пользователя" />
+                  <HBox>
+                     <children>
+                        <CheckBox fx:id="isPasswordGenerator" mnemonicParsing="false" text="Автоматически сгенерировать пароль" />
+                     </children>
+                  </HBox>
+                        <ComboBox fx:id="roles" prefHeight="25.0" prefWidth="275.0" promptText="Выберите роль" />
+                        <ComboBox fx:id="groupComboBox" prefHeight="25.0" prefWidth="275.0" promptText="Выберите группу" visible="false" managed="false"/>
+
+                        <BorderPane>
+                            <right>
+                                <Button fx:id="saveButton" mnemonicParsing="false" text="Сохранить" BorderPane.alignment="CENTER" />
+                            </right>
+                            <center>
+                                <Label fx:id="requestLabel" BorderPane.alignment="CENTER" />
+                            </center>
+                        </BorderPane>
+                    </children>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </children>
+</VBox>
