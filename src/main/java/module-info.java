@@ -8,10 +8,12 @@ module org.dormitory.dormitory {
     requires java.desktop; // Для работы с OkHttp
     requires java.net.http;
     requires static lombok;
+    requires kafka.clients;
 
     opens org.diplom.dormitory.model to com.fasterxml.jackson.databind;
     opens org.diplom.dormitory.controller to javafx.fxml; // Открываем пакет контроллеров для FXMLLoader
     exports org.diplom.dormitory;
     opens org.diplom.dormitory.controller.commandant to javafx.fxml; // Экспортируем основной пакет приложения
     exports org.diplom.dormitory.controller.commandant;
-    }
+    opens org.diplom.dormitory.controller.security to javafx.fxml;
+}

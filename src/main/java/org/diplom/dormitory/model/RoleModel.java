@@ -6,4 +6,11 @@ import lombok.Data;
 public class RoleModel {
     private Integer id;
     private String roleName;
+
+    @Override
+    public String toString() {
+        return
+                roleName;
+
+    }
 }

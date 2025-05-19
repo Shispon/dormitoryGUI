@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="20.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.diplom.dormitory.controller.commandant.ShowUsersListController">
+   <children>
+      <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+         <children>
+            <Button fx:id="returnBackButton" mnemonicParsing="false" text="Вернуться" />
+         </children>
+      </HBox>
+      <MenuButton alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Выберите список">
+        <items>
+          <MenuItem fx:id="chooseStaffMenuItem" mnemonicParsing="false" text="Список пользователей" />
+          <MenuItem fx:id="chooseResidentsMenuItem" mnemonicParsing="false" text="Список жильцов" />
+        </items>
+      </MenuButton>
+      <TextField fx:id="enterTextField" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
+      <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+         <content>
+            <ListView fx:id="usersListView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
+         </content>
+      </ScrollPane>
+   </children>
+</VBox>

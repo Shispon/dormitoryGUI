@@ -7,17 +7,100 @@ import javafx.concurrent.Task;
 import org.diplom.dormitory.model.*;
 import org.diplom.dormitory.util.JsonBuilder;
 
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class CommandantService {
 
-    public static StaffModel createStaff (String json) {
+    public static Task<ResidentDTO> getResidentById(int id) {
+        return new Task<>() {
+            @Override
+            protected ResidentDTO call() {
+                try {
+                    // Добавляем id как параметр в строку запроса
+                    URL url = new URL("http://localhost:8080/api/residents/getResidentById?id=" + id);
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.setRequestMethod("GET");
+                    connection.setRequestProperty("Accept", "application/json");
+
+                    if (connection.getResponseCode() == 200) {
+                        ObjectMapper mapper = JsonBuilder.getObjectMapper();
+                        return mapper.readValue(
+                                connection.getInputStream(),
+                                ResidentDTO.class
+                        );
+                    } else {
+                        System.err.println("Ошибка: код ответа " + connection.getResponseCode());
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        };
+    }
+
+    public static Task<List<ResidentDTO>> getAllResidentsTask() {
+        return new Task<>() {
+            @Override
+            protected List<ResidentDTO> call() {
+                try {
+                    URL url = new URL("http://localhost:8080/api/residents");
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.setRequestMethod("GET");
+                    connection.setRequestProperty("Accept", "application/json");
+
+                    if (connection.getResponseCode() == 200) {
+                        ObjectMapper mapper = JsonBuilder.getObjectMapper();
+                        return mapper.readValue(
+                                connection.getInputStream(),
+                                mapper.getTypeFactory().constructCollectionType(List.class, ResidentDTO.class)
+                        );
+                    } else {
+                        System.err.println("Ошибка: код ответа " + connection.getResponseCode());
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return new ArrayList<>();
+            }
+        };
+    }
+
+    public static Task<List<StaffDTO>> getAllStaffTask() {
+        return new Task<>() {
+            @Override
+            protected List<StaffDTO> call() {
+                try {
+                    URL url = new URL("http://localhost:8080/api/staff");
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.setRequestMethod("GET");
+                    connection.setRequestProperty("Accept", "application/json");
+
+                    if (connection.getResponseCode() == 200) {
+                        ObjectMapper mapper = new ObjectMapper();
+                        return mapper.readValue(
+                                connection.getInputStream(),
+                                mapper.getTypeFactory().constructCollectionType(List.class, StaffDTO.class)
+                        );
+                    } else {
+                        System.err.println("Ошибка: код ответа " + connection.getResponseCode());
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return new ArrayList<>();
+            }
+        };
+    }
+
+
+    public static StaffDTO createStaff (String json) {
         try {
             URL url = new URL("http://localhost:8080/api/staff");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -34,7 +117,7 @@ public class CommandantService {
             int responseCode = connection.getResponseCode();
             if (responseCode == 201 || responseCode == 200) {
                 try (InputStream inputStream = connection.getInputStream()) {
-                    return JsonBuilder.getObjectMapper().readValue(inputStream, StaffModel.class);
+                    return JsonBuilder.getObjectMapper().readValue(inputStream, StaffDTO.class);
                 }
             } else {
                 System.err.println("Ошибка: " + responseCode);
@@ -92,7 +175,7 @@ public class CommandantService {
     }
 
 
-    public static ParentModel createParent (String json) {
+    public static ParentDTO createParent (String json) {
         try {
             URL url = new URL("http://localhost:8080/api/parent");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -109,7 +192,7 @@ public class CommandantService {
             int responseCode = connection.getResponseCode();
             if (responseCode == 201 || responseCode == 200) {
                 try (InputStream inputStream = connection.getInputStream()) {
-                    return JsonBuilder.getObjectMapper().readValue(inputStream, ParentModel.class);
+                    return JsonBuilder.getObjectMapper().readValue(inputStream, ParentDTO.class);
                 }
             } else {
                 System.err.println("Ошибка: " + responseCode);
@@ -129,7 +212,7 @@ public class CommandantService {
         return null;
     }
 
-    public static ResidentModel sendResidentJson(String json) {
+    public static ResidentDTO sendResidentJson(String json) {
         try {
             URL url = new URL("http://localhost:8080/api/residents");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -148,7 +231,7 @@ public class CommandantService {
             if (responseCode == 201 || responseCode == 200) {
                 // Читаем JSON-ответ
                 try (InputStream inputStream = connection.getInputStream()) {
-                    return JsonBuilder.getObjectMapper().readValue(inputStream, ResidentModel.class);
+                    return JsonBuilder.getObjectMapper().readValue(inputStream, ResidentDTO.class);
                 }
             } else {
                 System.err.println("Ошибка: " + responseCode);

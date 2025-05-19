@@ -12,11 +12,12 @@ import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.diplom.dormitory.model.GroupModel;
-import org.diplom.dormitory.model.ResidentModel;
+import org.diplom.dormitory.model.ResidentDTO;
 import org.diplom.dormitory.service.ResidentApiService.CommandantService;
 import org.diplom.dormitory.util.JsonBuilder;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class CreateUserController {
 
@@ -27,7 +28,7 @@ public class CreateUserController {
     @FXML
     private TextField lastName;
     @FXML
-    private TextField age;
+    private DatePicker setAge;
     @FXML
     private TextField phoneNumber;
     @FXML
@@ -61,7 +62,7 @@ public class CreateUserController {
         firstName.clear();
         secondName.clear();
         lastName.clear();
-        age.clear();
+        setAge.setValue(LocalDate.of(2004, 1, 1));
         phoneNumber.clear();
         email.clear();
         telegramId.clear();
@@ -182,11 +183,12 @@ public class CreateUserController {
 
     private void saveResident() throws JsonProcessingException {
         // Создание DTO объекта из введенных данных
-        ResidentModel dto = new ResidentModel();
+        ResidentDTO dto = new ResidentDTO();
         dto.setFirstName(firstName.getText());
         dto.setSecondName(secondName.getText());
+        System.out.println("Выбранная дата: " + setAge.getValue());
         dto.setLastName(lastName.getText());
-        dto.setAge(Integer.parseInt(age.getText()));
+        dto.setAge(setAge.getValue());
         dto.setPhoneNumber(phoneNumber.getText());
         dto.setMail(email.getText());
         dto.setTelegramId(telegramId.getText());

@@ -7,13 +7,14 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class StaffModel {
+public class ParentDTO {
     private Integer id;
     private String firstName;
     private String secondName;
     private String lastName;
-    private String password;
     private String phoneNumber;
-    private String email;
+    private String mail;
+    private String telegramId;
+    private String chatId;
     private Integer roleId;
 }

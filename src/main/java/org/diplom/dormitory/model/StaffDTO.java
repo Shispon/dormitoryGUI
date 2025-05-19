@@ -1,17 +1,19 @@
 package org.diplom.dormitory.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-
-import java.time.LocalDateTime;
+import lombok.NoArgsConstructor;
 
 @Data
-public class ParentModel {
+@NoArgsConstructor
+@AllArgsConstructor
+public class StaffDTO {
     private Integer id;
     private String firstName;
     private String secondName;
     private String lastName;
+    private String password;
     private String phoneNumber;
-    private String mail;
-    private String telegramId;
+    private String email;
     private Integer roleId;
 }

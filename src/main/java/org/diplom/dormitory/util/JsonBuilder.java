@@ -4,10 +4,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import org.diplom.dormitory.model.ParentModel;
-import org.diplom.dormitory.model.ResidentModel;
+import org.diplom.dormitory.model.ParentDTO;
+import org.diplom.dormitory.model.ResidentDTO;
 import org.diplom.dormitory.model.ResidentParentModel;
-import org.diplom.dormitory.model.StaffModel;
+import org.diplom.dormitory.model.StaffDTO;
 
 public class JsonBuilder {
 
@@ -20,12 +20,12 @@ public class JsonBuilder {
             .registerModule(new JavaTimeModule())
             .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 
-    public static String buildResidentJson(ResidentModel dto) throws JsonProcessingException {
+    public static String buildResidentJson(ResidentDTO dto) throws JsonProcessingException {
         dto.setRoleId(2);
         return objectMapper.writeValueAsString(dto);
     }
 
-    public static String buildParentJson(ParentModel parent) throws JsonProcessingException {
+    public static String buildParentJson(ParentDTO parent) throws JsonProcessingException {
         parent.setRoleId(3);
         return objectMapper.writeValueAsString(parent);
     }
@@ -34,7 +34,7 @@ public class JsonBuilder {
         return objectMapper.writeValueAsString(residentParentModel);
     }
 
-    public static String buildStaffJson(StaffModel staffModel) throws JsonProcessingException {
-        return objectMapper.writeValueAsString(staffModel);
+    public static String buildStaffJson(StaffDTO staffDTO) throws JsonProcessingException {
+        return objectMapper.writeValueAsString(staffDTO);
     }
 }

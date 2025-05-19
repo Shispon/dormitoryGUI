@@ -30,6 +30,9 @@ public class CommandantController {
        createNewUserMenuItem.setOnAction(event -> {
            loadForm("/fxml/commandant/chooseUser.fxml");
        });
+       findUserMenuItem.setOnAction(event -> {
+           loadForm("/fxml/commandant/chooseList.fxml");
+       });
    }
     private void loadForm(String fxmlPath) {
         try {

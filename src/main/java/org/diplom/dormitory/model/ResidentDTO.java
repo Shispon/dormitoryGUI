@@ -4,19 +4,21 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResidentModel {
+public class ResidentDTO {
     private Integer id;
     private String firstName;
     private String secondName;
     private String lastName;
-    private Integer age;
+    private LocalDate age;
     private String phoneNumber;
     private String mail;
     private String telegramId;
+    private String chatId;
     private byte[] photo;
     private byte[] qrCode;
     private Boolean isPresent;

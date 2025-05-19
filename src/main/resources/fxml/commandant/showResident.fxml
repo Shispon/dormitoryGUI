@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.diplom.dormitory.controller.commandant.ShowResidentController">
+   <children>
+      <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+         <content>
+             <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="20.0">
+                 <children>
+                  <ImageView fx:id="photoImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                     <Label fx:id="fullNameLabel" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
+                     <Label fx:id="ageLabel" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
+                     <Label fx:id="phoneNumberLabel" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
+                     <Label fx:id="mailLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="84.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
+                     <ImageView fx:id="qrCodeImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                 </children>
+             </VBox>
+         </content>
+      </ScrollPane>
+   </children>
+</VBox>

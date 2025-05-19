@@ -5,9 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import lombok.Data;
-import org.diplom.dormitory.model.GroupModel;
-import org.diplom.dormitory.model.ParentModel;
-import org.diplom.dormitory.model.ResidentModel;
+import org.diplom.dormitory.model.ParentDTO;
 import org.diplom.dormitory.model.ResidentParentModel;
 import org.diplom.dormitory.service.ResidentApiService.CommandantService;
 import org.diplom.dormitory.util.JsonBuilder;
@@ -39,7 +37,7 @@ public class CreateParentController {
     }
 
     private void saveParent() throws JsonProcessingException {
-        ParentModel parent = new ParentModel();
+        ParentDTO parent = new ParentDTO();
         parent.setFirstName(firstName.getText());
         parent.setSecondName(secondName.getText());
         parent.setLastName(lastName.getText());

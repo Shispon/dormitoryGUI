@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 // Импорт классов для запросов (можешь использовать RestTemplate, Retrofit или свой сервис)
 import org.diplom.dormitory.model.GroupModel;
 import org.diplom.dormitory.model.RoleModel;
-import org.diplom.dormitory.model.StaffModel;
+import org.diplom.dormitory.model.StaffDTO;
 import org.diplom.dormitory.service.ResidentApiService.CommandantService;
 import org.diplom.dormitory.util.JsonBuilder;
 
@@ -112,13 +112,13 @@ public class CreateStaffController {
 
     private void handleSave() throws JsonProcessingException {
         // Создаем новый объект StaffModel и заполняем его данными из полей
-        StaffModel staffModel = new StaffModel();
-        staffModel.setFirstName(firstName.getText());
-        staffModel.setSecondName(secondName.getText());
-        staffModel.setLastName(lastName.getText());
-        staffModel.setEmail(mail.getText());
-        staffModel.setPhoneNumber(phoneNumber.getText());
-        staffModel.setPassword(password.getText());
+        StaffDTO staffDTO = new StaffDTO();
+        staffDTO.setFirstName(firstName.getText());
+        staffDTO.setSecondName(secondName.getText());
+        staffDTO.setLastName(lastName.getText());
+        staffDTO.setEmail(mail.getText());
+        staffDTO.setPhoneNumber(phoneNumber.getText());
+        staffDTO.setPassword(password.getText());
 
         // Получаем выбранную роль
         RoleModel selectedRole = roles.getValue();
@@ -128,7 +128,7 @@ public class CreateStaffController {
         }
 
         // Устанавливаем роль в модель
-        staffModel.setRoleId(selectedRole.getId());
+        staffDTO.setRoleId(selectedRole.getId());
 
         // Проверка: если выбран "Curator", обязательно должна быть выбрана группа
         final GroupModel selectedGroup = selectedRole.getRoleName().equalsIgnoreCase("Curator")
@@ -141,12 +141,12 @@ public class CreateStaffController {
         }
 
         // Преобразуем модель в JSON
-        String json = JsonBuilder.buildStaffJson(staffModel);
+        String json = JsonBuilder.buildStaffJson(staffDTO);
 
         // Создаем задачу для отправки данных на сервер
-        Task<StaffModel> createTask = new Task<>() {
+        Task<StaffDTO> createTask = new Task<>() {
             @Override
-            protected StaffModel call() {
+            protected StaffDTO call() {
 
                 return CommandantService.createStaff(json);
             }
@@ -154,7 +154,7 @@ public class CreateStaffController {
 
         // Обработка успешного завершения задачи
         createTask.setOnSucceeded(e -> {
-            StaffModel createdStaff = createTask.getValue();
+            StaffDTO createdStaff = createTask.getValue();
             if (createdStaff != null && createdStaff.getId() != null) {
                 requestLabel.setText("Работник успешно создан!");
 

@@ -31,9 +31,9 @@ public class MainApp extends Application {
     }
 
 
-    public static void showChooseUserController() {
+    public static void showSecurityWindow() {
         try {
-            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/fxml/commandant/chooseUser.fxml"));
+            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/fxml/security/security.fxml"));
             Scene scene = new Scene(loader.load());
             primaryStage.setScene(scene);
             primaryStage.setTitle("Комендант");
@@ -57,6 +57,10 @@ public class MainApp extends Application {
         switch (role) {
             case "Commandant":
                 MainApp.showCommandantWindow();
+                break;
+            case "Security":
+                MainApp.showSecurityWindow();
+                break;
         }
     }
 }
